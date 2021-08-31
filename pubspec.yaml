@@ -1,0 +1,48 @@
+name: DART_PACKAGE_NAME
+description: DESCRIPTION
+publish_to: 'none'
+
+version: 0.0.1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.2.3"
+
+# TODO remove unnecessary dependencies
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # utopia libs
+  utopia_arch: ^0.0.1
+  utopia_firebase_crashlytics: ^0.0.1
+  utopia_hooks: ^0.0.1
+  utopia_widgets: ^0.0.1
+  utopia_utils: ^0.0.2
+
+  # architecture
+  flutter_hooks: ^0.18.0
+  provider: ^6.0.0
+  injector: ^2.0.0
+
+  # firebase
+  firebase_core: ^1.6.0
+
+  # platform APIs
+
+  # misc widgets
+
+  # misc utils
+
+  # code generator runtimes
+  freezed_annotation: ^0.14.2
+  json_annotation: ^4.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # code generators
+  freezed: ^0.14.2
+  json_serializable: ^4.1.4
+  build_runner: ^2.1.1
