@@ -4,8 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:utopia_firebase_crashlytics/utopia_firebase_crashlytics.dart';
-import 'package:utopia_hooks/hook/effect/use_async_effect.dart';
-import 'package:utopia_hooks/widget/provider/hook_state_provider_widget.dart';
+import 'package:utopia_hooks/utopia_hooks.dart';
 
 class SetupStateProvider extends HookStateProviderWidget<SetupState> {
   @override
@@ -13,7 +12,7 @@ class SetupStateProvider extends HookStateProviderWidget<SetupState> {
     final isInitializedValue = useState<bool>(false);
     final context = useContext();
 
-    useAsyncEffect(() async {
+    useSimpleEffect(() async {
       await Future.wait([
         _precacheImages(context),
         _setupFirebase(),

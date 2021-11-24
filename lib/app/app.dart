@@ -7,11 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:utopia_arch/injector/injector_provider.dart';
-import 'package:utopia_arch/navigation/route_config.dart';
-import 'package:utopia_arch/navigation/scoped_navigator_state.dart';
+import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
-import 'package:utopia_utils/reporter/run_app_with_reporter.dart';
+import 'package:utopia_utils/utopia_utils.dart';
 
 class App extends HookWidget {
   static void run() {
