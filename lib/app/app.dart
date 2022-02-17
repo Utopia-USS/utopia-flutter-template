@@ -4,7 +4,6 @@ import 'package:DART_PACKAGE_NAME/app/app_routing.dart';
 import 'package:DART_PACKAGE_NAME/app/state/setup/setup_state_provider.dart';
 import 'package:DART_PACKAGE_NAME/common/constants/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:utopia_arch/utopia_arch.dart';
@@ -14,8 +13,10 @@ import 'package:utopia_utils/utopia_utils.dart';
 class App extends HookWidget {
   static void run() {
     UtopiaHooks.reporter = appReporter;
-    runAppWithReporter(appReporter, App());
+    runAppWithReporter(appReporter, const App());
   }
+
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class App extends HookWidget {
   Widget _buildApp({required GlobalKey<NavigatorState> navigatorKey}) {
     return MaterialApp(
       theme: appTheme,
-      scrollBehavior: MaterialScrollBehavior().copyWith(physics: BouncingScrollPhysics()),
+      scrollBehavior: const MaterialScrollBehavior().copyWith(physics: const BouncingScrollPhysics()),
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       onGenerateInitialRoutes: (name) => [RouteConfig.generateInitialRoute(AppRouting.routes, name)],
