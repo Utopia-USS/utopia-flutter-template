@@ -5,6 +5,7 @@ import 'package:DART_PACKAGE_NAME/app/state/setup/setup_state_provider.dart';
 import 'package:DART_PACKAGE_NAME/app/widget/app_global_error_dialog.dart';
 import 'package:DART_PACKAGE_NAME/common/constants/app_theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -33,10 +34,12 @@ class App extends HookWidget {
       builder: (context, child) => MultiProvider(
         providers: _buildProviders(),
         child: HookBuilder(builder: (context) {
-          useStreamSubscription<UiGlobalError>(
-            uiErrors,
-            (error) => _handleUiError(context, error, navigatorKey.currentState!),
-          );
+          if (!kDebugMode) {
+            useStreamSubscription<UiGlobalError>(
+              uiErrors,
+              (error) => _handleUiError(context, error, navigatorKey.currentState!),
+            );
+          }
           return child;
         }),
       ),

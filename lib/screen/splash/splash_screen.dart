@@ -8,15 +8,6 @@ class SplashScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final submitState = useSubmitState();
-
-    useSimpleEffect(() {
-      submitState.run<void>(() async {
-        await Future<void>.delayed(const Duration(seconds: 1));
-        throw Exception("Test");
-      });
-    }, []);
-
     return Container();
   }
 }
