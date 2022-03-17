@@ -29,7 +29,7 @@ class AppTextField extends HookWidget {
       child: (controller) => AppTextFieldRaw(
         controller: controller,
         keyboardType: keyboardType,
-        obscureText: state.isObscured == true,
+        obscureText: state.isObscured ?? false,
         focusNode: state.focusNode,
         label: label,
         hint: hint,

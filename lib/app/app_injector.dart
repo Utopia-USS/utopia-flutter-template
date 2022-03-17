@@ -9,7 +9,7 @@ class AppInjector {
     final injector = Injector();
     injector
       ..registerSingleton(() => AppConfig.current)
-      ..registerSingleton(() => PreferencesService());
+      ..registerSingleton(PreferencesService.new);
     return injector;
   }
 }

@@ -14,8 +14,7 @@ class SetupStateProvider extends HookStateProviderWidget<SetupState> {
     useSimpleEffect(() async {
       await Future.wait([
         _precacheImages(context),
-        _setupFirebase(),
-        Future.delayed(const Duration(milliseconds: 500)), // workaround: ensure long enough wait to prevent startup lag
+        _setupFirebase()
       ]);
       isInitializedValue.value = true;
     }, []);
@@ -28,7 +27,8 @@ class SetupStateProvider extends HookStateProviderWidget<SetupState> {
   }
 
   Future<void> _setupFirebase() async {
-    await Firebase.initializeApp();
-    await UtopiaFirebaseCrashlytics.setup();
+    // TODO uncomment after firebase setup
+    //await Firebase.initializeApp();
+    //await UtopiaFirebaseCrashlytics.setup();
   }
 }

@@ -1,5 +1,8 @@
-include: package:flutter_lints/flutter.yaml
+include: package:utopia_lints/lints.yaml
 
-linter:
-  rules:
-    use_key_in_widget_constructors: false
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    invalid_annotation_target: ignore
