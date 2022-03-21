@@ -14,11 +14,11 @@ dependencies:
     sdk: flutter
 
   # utopia libs
-  utopia_arch: ^0.3.4+1
-  utopia_firebase_crashlytics: ^0.1.2+1
-  utopia_hooks: ^0.3.0
-  utopia_widgets: ^0.0.9+1
-  utopia_utils: ^0.2.10
+  utopia_arch: ^0.4.0
+  utopia_firebase_crashlytics: ^0.1.2+2
+  utopia_hooks: ^0.3.1
+  utopia_widgets: ^0.0.9+2
+  utopia_utils: ^0.2.11
 
   # architecture
   provider: ^6.0.1
