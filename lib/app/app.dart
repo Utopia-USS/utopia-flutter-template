@@ -4,6 +4,7 @@ import 'package:DART_PACKAGE_NAME/app/app_routing.dart';
 import 'package:DART_PACKAGE_NAME/app/state/setup/setup_state_provider.dart';
 import 'package:DART_PACKAGE_NAME/app/widget/app_global_error_dialog.dart';
 import 'package:DART_PACKAGE_NAME/common/constants/app_theme.dart';
+import 'package:DART_PACKAGE_NAME/util/hook/use_async_stream_subscription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +35,10 @@ class App extends HookWidget {
       builder: (context, child) => MultiProvider(
         providers: _buildProviders(),
         child: HookBuilder(builder: (context) {
-          if (!kDebugMode) {
-            useStreamSubscription<UiGlobalError>(
-              uiErrors,
-              (error) => _handleUiError(context, error, navigatorKey.currentState!),
-            );
-          }
+          useAsyncStreamSubscription<UiGlobalError>(
+            uiErrors,
+            (error) => _handleUiError(context, error, navigatorKey.currentState!),
+          );
           return child;
         }),
       ),
@@ -78,11 +77,14 @@ class App extends HookWidget {
     ];
   }
 
-  void _handleUiError(BuildContext context, UiGlobalError error, NavigatorState navigator) {
-    final route = DialogRoute<void>(
-      context: context,
-      builder: (context) => AppGlobalErrorDialog(error: error),
-    );
-    navigator.push(route);
+  Future<void> _handleUiError(BuildContext context, UiGlobalError error, NavigatorState navigator) async {
+    // skip debug-time assertion errors
+    if (error.error is! AssertionError) {
+      final route = DialogRoute<void>(
+        context: context,
+        builder: (context) => AppGlobalErrorDialog(error: error),
+      );
+      await navigator.push(route);
+    }
   }
 }
