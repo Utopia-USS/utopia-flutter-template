@@ -1,5 +1,5 @@
-import 'package:DART_PACKAGE_NAME/common/constants/app_colors.dart';
-import 'package:DART_PACKAGE_NAME/common/constants/app_text.dart';
+import 'package:DART_PACKAGE_NAME/common/constant/app_colors.dart';
+import 'package:DART_PACKAGE_NAME/common/constant/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,9 +51,9 @@ class AppTextFieldThemeData {
 class AppTextFieldTheme extends StatelessWidget {
   final AppTextFieldThemeData Function(AppTextFieldThemeData) transform;
 
-  const AppTextFieldTheme.transform({Key? key, required this.transform}) : super(key: key);
+  const AppTextFieldTheme.transform({super.key, required this.transform});
 
-  AppTextFieldTheme({Key? key, required AppTextFieldThemeData theme}) : transform = ((_) => theme), super(key: key);
+  AppTextFieldTheme({super.key, required AppTextFieldThemeData theme}) : transform = ((_) => theme);
 
   static AppTextFieldThemeData of(BuildContext context) => context.watch() ?? AppTextFieldThemeData.standard;
 

@@ -1,12 +1,14 @@
 import 'package:DART_PACKAGE_NAME/app/app_injector.dart';
+import 'package:DART_PACKAGE_NAME/app/app_localizations.dart';
 import 'package:DART_PACKAGE_NAME/app/app_reporter.dart';
 import 'package:DART_PACKAGE_NAME/app/app_routing.dart';
-import 'package:DART_PACKAGE_NAME/app/state/setup/setup_state_provider.dart';
+import 'package:DART_PACKAGE_NAME/app/state/firebase/firebase_state.dart';
+import 'package:DART_PACKAGE_NAME/app/state/initialization/initialization_state.dart';
+import 'package:DART_PACKAGE_NAME/app/state/precache/image_precache_state.dart';
 import 'package:DART_PACKAGE_NAME/app/widget/app_global_error_dialog.dart';
-import 'package:DART_PACKAGE_NAME/common/constants/app_theme.dart';
+import 'package:DART_PACKAGE_NAME/common/constant/app_theme.dart';
 import 'package:DART_PACKAGE_NAME/util/hook/use_async_stream_subscription.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -24,7 +26,7 @@ class App extends HookWidget {
 
   final Stream<UiGlobalError> uiErrors;
 
-  const App({Key? key, required this.uiErrors}) : super(key: key);
+  const App({super.key, required this.uiErrors});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +35,11 @@ class App extends HookWidget {
     return _buildApp(
       navigatorKey: navigatorKey,
       builder: (context, child) => MultiProvider(
-        providers: _buildProviders(),
+        providers: _buildProviders(navigatorKey),
         child: HookBuilder(builder: (context) {
           useAsyncStreamSubscription<UiGlobalError>(
             uiErrors,
-            (error) => _handleUiError(context, error, navigatorKey.currentState!),
+            (error) async => _handleUiError(context, error, navigatorKey.currentState!),
           );
           return child;
         }),
@@ -61,19 +63,24 @@ class App extends HookWidget {
       initialRoute: AppRouting.initialRoute,
       // localization
       localizationsDelegates: const [
+        AppLocalizationsDelegate(),
         DefaultMaterialLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
       ],
+      supportedLocales: localizedLabels.keys,
       // other
       debugShowCheckedModeBanner: false,
       builder: (context, child) => builder(context, child!),
     );
   }
 
-  List<SingleChildWidget> _buildProviders() {
+  List<SingleChildWidget> _buildProviders(GlobalKey<NavigatorState> navigatorKey) {
     return [
-      const InjectorProvider(setupInjector: AppInjector.setup),
-      SetupStateProvider(),
+      Provider.value(value: navigatorKey),
+      Provider(create: (context) => AppInjector.setup()),
+      const HookStateProvider(useFirebaseState),
+      const HookStateProvider(useImagePrecacheState),
+      const HookStateProvider(useInitializationState),
     ];
   }
 

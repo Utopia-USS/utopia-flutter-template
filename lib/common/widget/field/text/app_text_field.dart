@@ -1,6 +1,5 @@
-import 'package:DART_PACKAGE_NAME/common/constants/app_colors.dart';
-import 'package:DART_PACKAGE_NAME/common/widgets/field/text/app_text_field_raw.dart';
-import 'package:DART_PACKAGE_NAME/extensions.dart';
+import 'package:DART_PACKAGE_NAME/common/constant/app_colors.dart';
+import 'package:DART_PACKAGE_NAME/common/widget/field/text/app_text_field_raw.dart';
 import 'package:flutter/material.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_hooks/utopia_hooks.dart';
@@ -14,7 +13,7 @@ class AppTextField extends HookWidget {
   final Widget? prefix, suffix;
 
   const AppTextField({
-    Key? key,
+    super.key,
     required this.state,
     this.obscuredState,
     this.keyboardType,
@@ -22,7 +21,7 @@ class AppTextField extends HookWidget {
     this.hint,
     this.prefix,
     this.suffix,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
