@@ -1,21 +1,21 @@
 # Utopia flutter project template
 
 1. Create a directory for the project.
-1. Run `git init` in the directory.
-1. Download this repository as .zip and extract it in the directory.
-1. Pick a package name (must not contain '-' character) and replace `DART_PACKAGE_NAME` everywhere with it (Ctrl+Shift+R in IntelliJ).
-1. Setup platforms: `flutter create --project-name={package name picked in the previous step} --org={prefix for platform packages, e.g. "io.utopiasoft"} --platforms={e.g. "android,ios"} .`.
-1. Review dependencies in `pubspec.yaml`.
-1. Cleanup this README file.
-1. If `melos` is required:
+2. Run `git init` in the directory.
+3. Download this repository as .zip and extract it in the directory.
+4. Pick a package name (must not contain '-' character) and replace `DART_PACKAGE_NAME` everywhere with it (Ctrl+Shift+R in IntelliJ).
+5. Setup platforms: `flutter create --project-name={package name picked in the previous step} --org={prefix for platform packages, e.g. "io.utopiasoft"} --platforms={e.g. "android,ios"} .`.
+6. Review dependencies in `pubspec.yaml`.
+7. Cleanup this README file.
+8. If `melos` is required:
     1. Create `packages/{name}` directory for the app and move everything except `.idea` directory and `mason` files to it.
-    1. Add `melos.yaml` file according to the docs.
+    2. Add `melos.yaml` file according to the docs.
 
 ---
 
 ## Requirements
 
-- Flutter SDK ([](https://docs.flutter.dev/get-started/install))
+- Flutter SDK ([Install](https://docs.flutter.dev/get-started/install))
 - Android SDK for Android builds (Easiest to install with [Android Studio](https://developer.android.com/studio))
 - Xcode for iOS builds
 - Melos (Install via: `flutter pub global activate melos`)

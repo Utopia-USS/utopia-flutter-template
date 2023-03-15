@@ -10,6 +10,7 @@ class AppTextFieldRaw extends HookWidget {
   final FocusNode? focusNode;
   final Widget? label, error, hint;
   final Widget? prefix, suffix;
+  final AppTextFieldThemeData? theme;
 
   const AppTextFieldRaw({
     super.key,
@@ -22,11 +23,13 @@ class AppTextFieldRaw extends HookWidget {
     this.hint,
     this.prefix,
     this.suffix,
+    this.theme,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTextFieldTheme.of(context);
+    final theme = this.theme ?? AppTextFieldTheme.of(context);
+    final focusNode = this.focusNode ?? useMemoized(FocusNode.new)!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,32 +38,35 @@ class AppTextFieldRaw extends HookWidget {
           DefaultTextStyle(style: theme.errorStyle, child: error!)
         else if (label != null)
           DefaultTextStyle(style: theme.labelStyle, child: label!),
-        _buildField(theme),
+        _buildField(theme, focusNode),
       ].separatedWith(const SizedBox(height: 8)),
     );
   }
 
-  Widget _buildField(AppTextFieldThemeData theme) {
+  Widget _buildField(AppTextFieldThemeData theme, FocusNode focusNode) {
     useListenable(controller);
-    return DecoratedBox(
-      decoration: theme.decoration,
-      child: Row(
-        children: [
-          if (prefix != null) Center(child: prefix!),
-          Expanded(
-            child: Padding(
-              padding: theme.textPadding,
-              child: Stack(
-                fit: StackFit.passthrough,
-                children: [
-                  if (hint != null) _buildHint(theme),
-                  _buildTextField(),
-                ],
+    return GestureDetector(
+      onTap: () => focusNode.requestFocus(),
+      child: DecoratedBox(
+        decoration: theme.decoration,
+        child: Row(
+          children: [
+            if (prefix != null) Center(child: prefix!),
+            Expanded(
+              child: Padding(
+                padding: theme.textPadding,
+                child: Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    if (hint != null) _buildHint(theme),
+                    _buildTextField(theme, focusNode),
+                  ],
+                ),
               ),
             ),
-          ),
-          if (suffix != null) Center(child: suffix!),
-        ],
+            if (suffix != null) Center(child: suffix!),
+          ],
+        ),
       ),
     );
   }
@@ -73,12 +79,13 @@ class AppTextFieldRaw extends HookWidget {
     );
   }
 
-  Widget _buildTextField() {
+  Widget _buildTextField(AppTextFieldThemeData theme, FocusNode focusNode) {
     return TextField(
       controller: controller,
       focusNode: focusNode,
       keyboardType: keyboardType,
       obscureText: obscureText,
+      style: theme.style,
       decoration: null,
     );
   }
