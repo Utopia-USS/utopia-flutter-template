@@ -44,7 +44,6 @@ class AppTextFieldRaw extends HookWidget {
   }
 
   Widget _buildField(AppTextFieldThemeData theme, FocusNode focusNode) {
-    useListenable(controller);
     return GestureDetector(
       onTap: () => focusNode.requestFocus(),
       child: DecoratedBox(
@@ -72,9 +71,13 @@ class AppTextFieldRaw extends HookWidget {
   }
 
   Widget _buildHint(AppTextFieldThemeData theme) {
-    return AnimatedOpacity(
-      opacity: controller.text.isEmpty ? 1 : 0,
-      duration: const Duration(milliseconds: 150),
+    return ValueListenableBuilder(
+      valueListenable: controller,
+      builder: (context, value, child) => AnimatedOpacity(
+        opacity: value.text.isEmpty ? 1 : 0,
+        duration: const Duration(milliseconds: 150),
+        child: child,
+      ),
       child: DefaultTextStyle(style: theme.hintStyle, child: hint!),
     );
   }
