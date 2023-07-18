@@ -3,12 +3,12 @@ import 'package:DART_PACKAGE_NAME/common/constant/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AppTextFieldThemeData {
+class AppFieldThemeData {
   final TextStyle style, labelStyle, errorStyle, hintStyle;
   final BoxDecoration decoration;
   final EdgeInsets textPadding;
 
-  const AppTextFieldThemeData({
+  const AppFieldThemeData({
     required this.style,
     required this.labelStyle,
     required this.errorStyle,
@@ -17,7 +17,7 @@ class AppTextFieldThemeData {
     required this.textPadding,
   });
 
-  AppTextFieldThemeData copyWith({
+  AppFieldThemeData copyWith({
     TextStyle? style,
     TextStyle? labelStyle,
     TextStyle? errorStyle,
@@ -25,7 +25,7 @@ class AppTextFieldThemeData {
     BoxDecoration? decoration,
     EdgeInsets? textPadding,
   }) {
-    return AppTextFieldThemeData(
+    return AppFieldThemeData(
       style: style ?? this.style,
       labelStyle: labelStyle ?? this.labelStyle,
       errorStyle: errorStyle ?? this.errorStyle,
@@ -35,7 +35,7 @@ class AppTextFieldThemeData {
     );
   }
 
-  static final standard = AppTextFieldThemeData(
+  static final standard = AppFieldThemeData(
     style: AppText.input,
     labelStyle: AppText.inputLabel,
     errorStyle: AppText.inputLabel.copyWith(color: AppColors.error),
@@ -48,14 +48,14 @@ class AppTextFieldThemeData {
   );
 }
 
-class AppTextFieldTheme extends StatelessWidget {
-  final AppTextFieldThemeData Function(AppTextFieldThemeData) transform;
+class AppFieldTheme extends StatelessWidget {
+  final AppFieldThemeData Function(AppFieldThemeData) transform;
 
-  const AppTextFieldTheme.transform({super.key, required this.transform});
+  const AppFieldTheme.transform({super.key, required this.transform});
 
-  AppTextFieldTheme({super.key, required AppTextFieldThemeData theme}) : transform = ((_) => theme);
+  AppFieldTheme({super.key, required AppFieldThemeData theme}) : transform = ((_) => theme);
 
-  static AppTextFieldThemeData of(BuildContext context) => context.watch() ?? AppTextFieldThemeData.standard;
+  static AppFieldThemeData of(BuildContext context) => context.watch() ?? AppFieldThemeData.standard;
 
   @override
   Widget build(BuildContext context) => Provider.value(value: transform(of(context)));
