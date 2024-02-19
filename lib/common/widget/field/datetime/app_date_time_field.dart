@@ -5,7 +5,6 @@ import 'package:DART_PACKAGE_NAME/common/widget/field/app_field_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utopia_arch/utopia_arch.dart';
-import 'package:utopia_utils/utopia_utils.dart';
 
 class AppDateTimeField extends StatelessWidget {
   static final _dateFormat = DateFormat('dd.MM.yyyy');
@@ -77,6 +76,6 @@ class AppDateTimeField extends StatelessWidget {
       if (result == null) return;
       value = value.copyWith(hour: result.hour, minute: result.minute);
     }
-    state.onChanged(value);
+    state.value = value;
   }
 }

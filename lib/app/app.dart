@@ -10,11 +10,10 @@ import 'package:DART_PACKAGE_NAME/common/constant/app_theme.dart';
 import 'package:DART_PACKAGE_NAME/util/hook/use_async_stream_subscription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:provider/single_child_widget.dart';
+import 'package:injector/injector.dart';
 import 'package:utopia_arch/utopia_arch.dart';
-import 'package:utopia_hooks/utopia_hooks.dart';
-import 'package:utopia_utils/utopia_utils.dart';
+
+typedef NavigatorKey = GlobalKey<NavigatorState>;
 
 class App extends HookWidget {
   static void run() {
@@ -34,8 +33,8 @@ class App extends HookWidget {
 
     return _buildApp(
       navigatorKey: navigatorKey,
-      builder: (context, child) => MultiProvider(
-        providers: _buildProviders(navigatorKey),
+      builder: (context, child) => HookProviderContainerWidget(
+        _buildProviders(navigatorKey),
         child: HookBuilder(builder: (context) {
           useAsyncStreamSubscription<UiGlobalError>(
             uiErrors,
@@ -74,14 +73,14 @@ class App extends HookWidget {
     );
   }
 
-  List<SingleChildWidget> _buildProviders(GlobalKey<NavigatorState> navigatorKey) {
-    return [
-      Provider.value(value: navigatorKey),
-      Provider(create: (context) => AppInjector.setup()),
-      const HookStateProvider(useFirebaseState),
-      const HookStateProvider(useImagePrecacheState),
-      const HookStateProvider(useInitializationState),
-    ];
+  Map<Type, Object? Function()> _buildProviders(NavigatorKey navigatorKey) {
+    return {
+      NavigatorKey: () => navigatorKey,
+      Injector: () => useMemoized(AppInjector.setup),
+      FirebaseState: () => useMemoized(useFirebaseState),
+      ImagePrecacheState: () => useMemoized(useImagePrecacheState),
+      InitializationState: () => useMemoized(useInitializationState), // leave at the end
+    };
   }
 
   Future<void> _handleUiError(BuildContext context, UiGlobalError error, NavigatorState navigator) async {

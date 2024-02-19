@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:utopia_utils/utopia_utils.dart';
+import 'package:utopia_arch/utopia_arch.dart';
 
 class AppGlobalErrorDialog extends StatelessWidget {
   final UiGlobalError error;

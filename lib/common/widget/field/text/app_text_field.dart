@@ -4,8 +4,6 @@ import 'package:DART_PACKAGE_NAME/common/widget/field/app_field_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:utopia_arch/utopia_arch.dart';
-import 'package:utopia_hooks/utopia_hooks.dart';
-import 'package:utopia_utils/utopia_utils.dart';
 
 class AppTextField extends HookWidget {
   final FieldState state;
@@ -36,9 +34,8 @@ class AppTextField extends HookWidget {
     final theme = this.theme ?? AppFieldTheme.of(context);
     final focusNode = useMemoized(FocusNode.new);
     return StatelessTextEditingControllerWrapper(
-      value: state.value,
-      onChanged: state.onChanged,
-      child: (controller) => AppFieldLayout(
+      text: state,
+      builder: (controller) => AppFieldLayout(
         theme: theme,
         showHint: state.value.isEmpty,
         required: required,

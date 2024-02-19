@@ -1,7 +1,7 @@
 import 'package:DART_PACKAGE_NAME/common/constant/app_colors.dart';
 import 'package:DART_PACKAGE_NAME/common/constant/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:utopia_arch/utopia_arch.dart';
 
 class AppFieldThemeData {
   final TextStyle style, labelStyle, errorStyle, hintStyle;
@@ -49,14 +49,15 @@ class AppFieldThemeData {
 }
 
 class AppFieldTheme extends StatelessWidget {
+  final Widget child;
   final AppFieldThemeData Function(AppFieldThemeData) transform;
 
-  const AppFieldTheme.transform({super.key, required this.transform});
+  const AppFieldTheme.transform({super.key, required this.child, required this.transform});
 
-  AppFieldTheme({super.key, required AppFieldThemeData theme}) : transform = ((_) => theme);
+  AppFieldTheme({super.key, required this.child, required AppFieldThemeData theme}) : transform = ((_) => theme);
 
-  static AppFieldThemeData of(BuildContext context) => context.watch() ?? AppFieldThemeData.standard;
+  static AppFieldThemeData of(BuildContext context) => context.getOrNull() ?? AppFieldThemeData.standard;
 
   @override
-  Widget build(BuildContext context) => Provider.value(value: transform(of(context)));
+  Widget build(BuildContext context) => ValueProvider(transform(of(context)), child: child);
 }

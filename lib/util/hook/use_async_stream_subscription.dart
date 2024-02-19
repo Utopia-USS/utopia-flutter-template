@@ -1,7 +1,7 @@
-import 'package:utopia_hooks/utopia_hooks.dart';
+import 'package:utopia_arch/utopia_arch.dart';
 
 void useAsyncStreamSubscription<T>(Stream<T> stream, Future<void> Function(T) block) {
-  final isHandlingState = useRef(false);
+  final isHandlingState = useState(false, listen: false);
   useStreamSubscription<T>(stream, (value) async {
     if(isHandlingState.value) return;
     isHandlingState.value = true;

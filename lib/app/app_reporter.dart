@@ -1,6 +1,6 @@
-import 'package:utopia_utils/utopia_utils.dart';
+import 'package:utopia_arch/utopia_arch.dart';
 
 final appReporter = Reporter.combined([
-  LoggerReporter(),
+  LoggerReporter.standard(),
   //const CrashlyticsReporter(), // TODO uncomment after firebase setup
 ]);
