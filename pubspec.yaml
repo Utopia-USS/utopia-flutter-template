@@ -17,8 +17,8 @@ dependencies:
   utopia_firebase_crashlytics: ^0.2.0
 
   # architecture
-  injector: ^2.0.0
-  fast_immutable_collections: ^7.2.1
+  injector: ^3.0.0
+  fast_immutable_collections: ^10.2.2
 
   # firebase
   firebase_core: ^2.4.1

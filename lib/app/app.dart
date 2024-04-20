@@ -77,9 +77,9 @@ class App extends HookWidget {
     return {
       NavigatorKey: () => navigatorKey,
       Injector: () => useMemoized(AppInjector.setup),
-      FirebaseState: () => useMemoized(useFirebaseState),
-      ImagePrecacheState: () => useMemoized(useImagePrecacheState),
-      InitializationState: () => useMemoized(useInitializationState), // leave at the end
+      FirebaseState: useFirebaseState,
+      ImagePrecacheState: useImagePrecacheState,
+      InitializationState: useInitializationState, // leave at the end
     };
   }
 
