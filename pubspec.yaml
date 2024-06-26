@@ -5,7 +5,7 @@ version: 0.0.1
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
-  flutter: ">=3.19.0"
+  flutter: ">=3.22.0"
 
 # TODO remove unnecessary dependencies
 dependencies:
@@ -15,6 +15,7 @@ dependencies:
   # utopia libs
   utopia_arch: ^0.5.0+8
   utopia_firebase_crashlytics: ^0.2.0
+  utopia_localization_utils: ^0.0.1
 
   # architecture
   injector: ^3.0.0
@@ -29,12 +30,12 @@ dependencies:
   flutter_svg: ^2.0.0+1
 
   # misc utils
-  intl: ^0.18.0
+  intl: ^0.19.0
 
   # code generator runtimes
   freezed_annotation: ^2.2.0
   json_annotation: ^4.3.0
-  flutter_sheet_localization: ^5.1.1
+  utopia_localization_annotation: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -43,15 +44,11 @@ dev_dependencies:
   # code generators
   freezed: ^2.3.2
   json_serializable: ^6.0.1
-  build_runner: ^2.1.5
-  flutter_sheet_localization_generator:
-    git:
-      url: https://github.com/Utopia-USS/flutter_sheet_localization.git
-      path: flutter_sheet_localization_generator
-      ref: deps_update
+  build_runner: ^2.4.11
+  utopia_localization_generator: ^0.0.2
 
   # lint
   utopia_lints: ^0.0.1+1
 
-dependency_overrides:
-  intl: ^0.18.0
+flutter:
+  uses-material-design: true

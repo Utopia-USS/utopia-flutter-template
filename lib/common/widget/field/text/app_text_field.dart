@@ -33,7 +33,7 @@ class AppTextField extends HookWidget {
   Widget build(BuildContext context) {
     final theme = this.theme ?? AppFieldTheme.of(context);
     final focusNode = useMemoized(FocusNode.new);
-    return StatelessTextEditingControllerWrapper(
+    return TextEditingControllerWrapper(
       text: state,
       builder: (controller) => AppFieldLayout(
         theme: theme,

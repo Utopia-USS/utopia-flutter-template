@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:utopia_arch/utopia_arch.dart';
+import 'package:utopia_localization_utils/utopia_localization_utils.dart';
 
 typedef NavigatorKey = GlobalKey<NavigatorState>;
 
@@ -62,11 +63,11 @@ class App extends HookWidget {
       initialRoute: AppRouting.initialRoute,
       // localization
       localizationsDelegates: const [
-        AppLocalizationsDelegate(),
+        UtopiaLocalizationsDelegate(appLocalizationsData),
         DefaultMaterialLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
       ],
-      supportedLocales: localizedLabels.keys,
+      supportedLocales: appLocalizationsData.supportedLocales,
       // other
       debugShowCheckedModeBanner: false,
       builder: (context, child) => builder(context, child!),
