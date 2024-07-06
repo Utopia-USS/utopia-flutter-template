@@ -63,7 +63,7 @@ class App extends HookWidget {
       initialRoute: AppRouting.initialRoute,
       // localization
       localizationsDelegates: const [
-        UtopiaLocalizationsDelegate(appLocalizationsData),
+        UtopiaLocalizationsDelegate<AppLocalizationsData>(appLocalizationsData),
         DefaultMaterialLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
       ],
