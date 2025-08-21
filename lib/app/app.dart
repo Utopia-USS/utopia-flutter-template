@@ -7,7 +7,6 @@ import 'package:DART_PACKAGE_NAME/app/state/initialization/initialization_state.
 import 'package:DART_PACKAGE_NAME/app/state/precache/image_precache_state.dart';
 import 'package:DART_PACKAGE_NAME/app/widget/app_global_error_dialog.dart';
 import 'package:DART_PACKAGE_NAME/common/constant/app_theme.dart';
-import 'package:DART_PACKAGE_NAME/util/hook/use_async_stream_subscription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
@@ -37,8 +36,9 @@ class App extends HookWidget {
       builder: (context, child) => HookProviderContainerWidget(
         _buildProviders(navigatorKey),
         child: HookBuilder(builder: (context) {
-          useAsyncStreamSubscription<UiGlobalError>(
+          useStreamSubscription<UiGlobalError>(
             uiErrors,
+            strategy: StreamSubscriptionStrategy.drop,
             (error) async => _handleUiError(context, error, navigatorKey.currentState!),
           );
           return child;
