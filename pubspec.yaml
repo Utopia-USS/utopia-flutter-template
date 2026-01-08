@@ -18,7 +18,6 @@ dependencies:
   utopia_localization_utils: ^0.0.1
 
   # architecture
-  injector: ^4.0.0
   fast_immutable_collections: ^11.0.4
 
   # firebase
