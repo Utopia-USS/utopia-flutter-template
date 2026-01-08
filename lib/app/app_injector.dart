@@ -6,7 +6,7 @@ class AppInjector {
 
   static Injector use() => useMemoized(() => Injector.build(_setup));
 
-  static void setup(InjectorRegister register) {
+  static void _setup(InjectorRegister register) {
     register.instance(AppConfig.current);
     register.noarg(PreferencesService.new);
   }
