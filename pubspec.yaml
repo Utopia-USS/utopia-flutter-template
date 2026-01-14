@@ -13,12 +13,11 @@ dependencies:
     sdk: flutter
 
   # utopia libs
-  utopia_arch: ^0.5.0+8
+  utopia_arch: ^0.5.1+17
   utopia_firebase_crashlytics: ^0.2.0
   utopia_localization_utils: ^0.0.1
 
   # architecture
-  injector: ^4.0.0
   fast_immutable_collections: ^11.0.4
 
   # firebase

@@ -1,15 +1,13 @@
 import 'package:DART_PACKAGE_NAME/app/app_config.dart';
-import 'package:injector/injector.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 
 class AppInjector {
   const AppInjector._();
 
-  static Injector setup() {
-    final injector = Injector();
-    injector
-      ..registerSingleton(() => AppConfig.current)
-      ..registerSingleton(PreferencesService.new);
-    return injector;
+  static Injector use() => useMemoized(() => Injector.build(_setup));
+
+  static void _setup(InjectorRegister register) {
+    register.instance(AppConfig.current);
+    register.noarg(PreferencesService.new);
   }
 }

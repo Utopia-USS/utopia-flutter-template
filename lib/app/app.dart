@@ -9,7 +9,6 @@ import 'package:DART_PACKAGE_NAME/app/widget/app_global_error_dialog.dart';
 import 'package:DART_PACKAGE_NAME/common/constant/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:injector/injector.dart';
 import 'package:utopia_arch/utopia_arch.dart';
 import 'package:utopia_localization_utils/utopia_localization_utils.dart';
 
@@ -77,7 +76,7 @@ class App extends HookWidget {
   Map<Type, Object? Function()> _buildProviders(NavigatorKey navigatorKey) {
     return {
       NavigatorKey: () => navigatorKey,
-      Injector: () => useMemoized(AppInjector.setup),
+      Injector: AppInjector.use,
       FirebaseState: useFirebaseState,
       ImagePrecacheState: useImagePrecacheState,
       InitializationState: useInitializationState, // leave at the end
